@@ -8,6 +8,10 @@ public class Card : MonoBehaviour, IClickable
     public List<Vector2Int> MovementTileOptions;
     protected Player player;
 
+    public void Setup(Player player)
+    {
+        this.player = player;
+    }
 
     public Card(Player player)
     {
@@ -30,7 +34,7 @@ public class Card : MonoBehaviour, IClickable
         {
             Vector3 tileDelta = new Vector3(movementTileOption.x, movementTileOption.y, 0);
             Vector3 displayLocation = player.transform.position + tileDelta;
-            GameObject decorator = Instantiate(MovementDecoration, displayLocation, new Quaternion(), null);
+            GameObject decorator = GameObject.Instantiate(MovementDecoration, displayLocation, new Quaternion(), null);
         }
     }
 
