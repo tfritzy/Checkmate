@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
+
+    public delegate void ClickMiss();
+    public static event ClickMiss OnClickMiss;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,19 +32,14 @@ public class InputController : MonoBehaviour
                     clickable.Click();
                 }
             }
-
-            /*
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics2D.Raycast(ray, out hit))
+            else
             {
-                Debug.Log(hit.collider.gameObject.name);
-                IClickable clickable = hit.collider.gameObject.GetComponent<IClickable>();
-                if (clickable != null)
+                if (OnClickMiss != null)
                 {
-                    print("My object is clicked by mouse");
+                    OnClickMiss();
                 }
-            }*/
+
+            }
         }
     }
 }
